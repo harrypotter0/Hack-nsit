@@ -1,13 +1,13 @@
-var CrowdBank = artifacts.require("./CrowdBank.sol");
+var SmartBank = artifacts.require("./SmartBank.sol");
 
 var account_one = web3.eth.accounts[0];
 var account_two = web3.eth.accounts[1];
 
-contract('CrowdBank', function(accounts) {
-  
+contract('SmartBank', function(accounts) {
+
   it("should allow people to propose loan and people to lend on it", function() {
     var instanceObj;
-    return CrowdBank.deployed().then(function(instance) {
+    return SmartBank.deployed().then(function(instance) {
       instanceObj = instance;
       return instance.newLoan(100, 106000, {from:account_one});
     }).then(function(transaction) {
@@ -27,7 +27,7 @@ contract('CrowdBank', function(accounts) {
 
   it("should handle getters", function() {
     var instanceObj;
-    return CrowdBank.deployed().then(function(instance) {
+    return SmartBank.deployed().then(function(instance) {
       instanceObj = instance;
       return instanceObj.loanList(0);
     }).then(function(response) {
@@ -43,7 +43,7 @@ contract('CrowdBank', function(accounts) {
 
   it("should allow borrower to accept proposal from lender", function() {
     var instanceObj;
-    return CrowdBank.deployed().then(function(instance) {
+    return SmartBank.deployed().then(function(instance) {
       instanceObj = instance;
       return instanceObj.getLoanDetailsByAddressPosition.call(account_one, 0);
     }).then(function(response) {
